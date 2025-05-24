@@ -1,13 +1,13 @@
 :root {
-    --primary-color: #e60012;
-    --primary-hover-color: #c5000f;
+    --primary-color: #e60012; 
+    --primary-hover-color: #c5000f; 
     --secondary-color: #333;
     --light-color: #f8f9fa;
     --dark-color: #212529;
     --gray-color: #6c757d;
-    --border-color: #e0e0e0;
-    --whatsapp-color: #25D366;
-    --whatsapp-hover-color: #128C7E;
+    --border-color: #e0e0e0; 
+    --whatsapp-color: #25D366; 
+    --whatsapp-hover-color: #128C7E; 
 }
 
 * {
@@ -21,12 +21,12 @@ body, html {
     line-height: 1.6;
     color: var(--dark-color);
     overflow-x: hidden;
-    scroll-behavior: smooth;
+    scroll-behavior: smooth; 
 }
 
 h1, h2, h3, h4 {
     margin-bottom: 1rem;
-    color: var(--dark-color);
+    color: var(--dark-color); 
 }
 
 p {
@@ -44,8 +44,8 @@ ul {
 
 img {
     max-width: 100%;
-    height: auto;
-    display: block;
+    height: auto; 
+    display: block; 
 }
 
 .container {
@@ -58,21 +58,21 @@ img {
 .btn {
     display: inline-block;
     padding: 10px 20px;
-    background-color: var(--primary-color);
+    background-color: var(--primary-color); 
     color: white;
     border-radius: 5px;
     transition: all 0.3s ease;
 }
 
 .btn:hover {
-    background-color: var(--primary-hover-color);
+    background-color: var(--primary-hover-color); 
     transform: translateY(-2px);
 }
 
 .btn-whatsapp {
     display: inline-block;
     padding: 10px 20px;
-    background-color: var(--whatsapp-color);
+    background-color: var(--whatsapp-color); 
     color: white;
     border-radius: 5px;
     transition: all 0.3s ease;
@@ -80,7 +80,7 @@ img {
 }
 
 .btn-whatsapp:hover {
-    background-color: var(--whatsapp-hover-color);
+    background-color: var(--whatsapp-hover-color); 
     transform: translateY(-2px);
 }
 
@@ -90,10 +90,10 @@ header {
     position: sticky;
     top: 0;
     z-index: 100;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 20px;
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 15px 20px; 
 }
 
 .header-scrolled {
@@ -111,17 +111,17 @@ header {
     margin-right: 15px;
 }
 
-.logo-container h1 {
+.logo-container h1 { 
     margin: 0;
     font-size: 1.8rem;
     color: var(--secondary-color);
 }
 
 nav ul {
-    display: flex;
+    display: flex; 
     list-style: none;
     margin: 0;
-    padding: 0;
+    padding: 0; 
 }
 
 nav ul li {
@@ -131,23 +131,23 @@ nav ul li {
 nav ul li a {
     color: var(--secondary-color);
     font-weight: 600;
-    text-decoration: none;
+    text-decoration: none; 
     transition: color 0.3s ease;
 }
 
 nav ul li a:hover {
-    color: var(--primary-color);
+    color: var(--primary-color); 
 }
 
 .menu-toggle {
-    display: none;
+    display: none; 
     background: none;
     border: none;
     font-size: 2rem;
     color: var(--secondary-color);
     cursor: pointer;
     padding: 5px 10px;
-    z-index: 101;
+    z-index: 101; 
 }
 
 .hero {
@@ -157,29 +157,29 @@ nav ul li a:hover {
     background-position: center;
     color: white;
     text-align: center;
-    padding: 20px;
-    margin-bottom: 0;
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    padding: 20px; 
+    margin-bottom: 0; 
+    height: 100vh; 
+    width: 100vw; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
     align-items: center;
-    overflow: hidden;
+    overflow: hidden; 
 }
 
 .hero h2 {
     font-size: 2.5rem;
     margin-bottom: 20px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); 
+    color: white; 
 }
 
 .hero p {
     font-size: 1.2rem;
     margin-bottom: 30px;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-    color: white;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); 
+    color: white; 
 }
 
 .vehicles {
@@ -191,7 +191,13 @@ nav ul li a:hover {
     text-align: center;
     margin-bottom: 40px;
     font-size: 2rem;
-    color: var(--secondary-color);
+    color: var(--secondary-color); 
+}
+
+.vehicle-grid-static { 
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
 }
 
 .carousel-container {
@@ -199,77 +205,58 @@ nav ul li a:hover {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
-    overflow-x: scroll; /* Cambiado de hidden a scroll para permitir el desplazamiento */
-    -webkit-overflow-scrolling: touch; /* Mejora el scroll en iOS */
-    scroll-snap-type: x mandatory; /* Habilita el 'scroll-snap' */
-    margin-top: 20px;
-    min-height: 350px;
-}
-
-/* Ocultar la barra de desplazamiento en webkit (Chrome, Safari) */
-.carousel-container::-webkit-scrollbar {
-    display: none;
-}
-
-/* Ocultar la barra de desplazamiento en Firefox */
-.carousel-container {
-    scrollbar-width: none;
+    overflow: hidden; 
+    margin-top: 20px; 
+    min-height: 350px; 
 }
 
 .carousel {
-    display: flex;
+    display: flex; 
     transition: transform 0.5s ease;
     -webkit-transform: translate3d(0,0,0);
     transform: translate3d(0,0,0);
-    /* No necesitamos un flex-wrap aquí, ya que el scroll manejará el desbordamiento */
 }
 
-#vehicleContainer.vehicle-grid {
-    /* Esta regla podría entrar en conflicto si se usa para el carrusel,
-       asegúrate de que #vehicleContainer se aplique solo cuando quieras un grid estático
-       y no cuando sea parte del carrusel dinámico.
-       Si se usa para el carrusel, debe ser 'flex' y 'nowrap'.
-    */
+#vehicleContainer.vehicle-grid { 
     display: flex;
-    flex-wrap: nowrap; /* Asegura que los elementos no se envuelvan */
+    flex-wrap: nowrap; 
     gap: 20px;
-    padding: 20px 0;
-    align-items: stretch;
+    padding: 20px 0; 
+    align-items: stretch; 
 }
 
 .vehicle-card {
-    flex: 0 0 auto;
+    flex: 0 0 auto; 
     width: 300px;
-    min-width: 280px;
-    max-width: 350px;
-    box-sizing: border-box;
+    min-width: 280px; 
+    max-width: 350px; 
+    box-sizing: border-box; 
     background-color: #fff;
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--border-color); 
     border-radius: 8px;
     padding: 20px;
-    text-align: center;
+    text-align: center; 
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-    scroll-snap-align: start; /* Asegura que cada tarjeta se "ajuste" al inicio del scroll */
+    justify-content: space-between; 
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08); 
 }
 
 .vehicle-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-5px); 
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 .vehicle-image {
-    height: 180px;
-    overflow: hidden;
+    height: 180px; 
+    overflow: hidden; 
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 15px;
-    background-color: #f0f0f0;
-    border-radius: 4px;
+    margin-bottom: 15px; 
+    background-color: #f0f0f0; 
+    border-radius: 4px; 
 }
 
 .vehicle-card img {
@@ -332,8 +319,8 @@ nav ul li a:hover {
     border-radius: 5px;
     cursor: pointer;
     text-decoration: none;
-    display: inline-block;
-    margin-top: 10px;
+    display: inline-block; 
+    margin-top: 10px; 
     transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
@@ -578,7 +565,6 @@ nav ul li a:hover {
 
     .carousel-container {
         padding: 0 10px;
-        /* Asegúrate de que no haya padding horizontal excesivo que impida el scroll */
     }
 
     .carousel-button {
@@ -587,12 +573,9 @@ nav ul li a:hover {
         font-size: 1.2rem;
     }
 
-    /* Ajustes específicos para el carrusel en móvil */
     .vehicle-card {
-        width: calc(100% - 20px); /* Ocupa casi todo el ancho, dejando espacio para el gap */
-        min-width: calc(100% - 20px); /* Asegura que cada tarjeta sea del 100% */
-        margin: 0 10px; /* Margen para centrar la tarjeta y que se vean los bordes de la siguiente */
-        box-sizing: border-box; /* Importante para el cálculo del ancho */
+        width: calc(100% - 0px);
+        min-width: calc(100% - 0px); 
     }
     
     .vehicle-grid-static {
