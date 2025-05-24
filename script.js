@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 transmission: "PHEV Automática",
                 fuel: "Gasolina/Eléctrico (Híbrido Enchufable)",
                 description: "Potencia y ahorro unidos para un máximo desempeño. Conducción Eléctrica / Híbrida. Dos motores eléctricos y un motor de combustión.",
-                image: "images/se-plus-M.png",
+                image: "images/se-plus-n.png",
                 whatsapp: "https://wa.me/+524924933151?text=Hola%20Gerardo,%20estoy%20interesado%20en%20el%20OutlanderPHEV%202025."
             },
             {
