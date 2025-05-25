@@ -1,4 +1,4 @@
-// Add Google Fonts dynamically
+// Add Google Fonts dynamically (si ya lo haces en CSS, puedes quitarlo de aquí)
 const link = document.createElement('link');
 link.href = 'https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Open+Sans:wght@400;600&display=swap';
 link.rel = 'stylesheet';
@@ -11,16 +11,6 @@ const dotsContainer = document.querySelector('.carousel-dots');
 const carousel = document.querySelector('.carousel');
 const menuToggle = document.querySelector('.menu-toggle');
 const navMenu = document.querySelector('nav ul');
-
-let currentIndex = 0;
-let itemsPerSlide = 3;
-let isDragging = false;
-let startPos = 0;
-let currentTranslate = 0;
-let prevTranslate = 0;
-let animationID = 0;
-let cardWidth = 0;
-const GAP = 20;
 
     // Datos de los vehículos
     const vehicles = [
@@ -127,255 +117,242 @@ const GAP = 20;
     ];
 
   
-function loadVehicles() {
-    vehicleContainer.innerHTML = '';
+let currentIndex = 0;
+let itemsPerSlide = 3; // Valor inicial, se ajustará con el resize
+let isDragging = false;
+let startPos = 0;
+let currentTranslate = 0;
+let prevTranslate = 0;
+let animationID = 0;
+let cardWidth = 0;
+const GAP = 20; // El mismo valor que en CSS
 
-    vehicles.forEach(vehicle => {
-        if (!vehicle.image) {
-            console.warn(`Vehículo "${vehicle.name}" no tiene una propiedad 'image'. Saltando.`);
-            return;
-        }
+// --- Funciones del Carrusel ---
 
-        const vehicleCard = document.createElement('div');
-        vehicleCard.className = 'vehicle-card';
-
-        const imageHtml = `<img src="${vehicle.image}" alt="${vehicle.name}" onerror="this.onerror=null;this.src='https://via.placeholder.com/300x200?text=Imagen+no+disponible';this.alt='Imagen no disponible';">`;
-
-        vehicleCard.innerHTML = `
-            <div class="vehicle-image">
-                ${imageHtml}
-            </div>
-            <div class="vehicle-info">
-                <h3>${vehicle.name}</h3>
-                <p>${vehicle.description}</p>
-                <div class="vehicle-features">
-                    <span>${vehicle.year}</span>
-                    <span>${vehicle.transmission}</span>
-                    <span>${vehicle.fuel}</span>
-                </div>
-                <div class="vehicle-price">${vehicle.price}</div>
-                <a href="${vehicle.whatsapp}" class="btn info-button" target="_blank">
-                    <i class="fab fa-whatsapp"></i> Más información
-                </a>
-            </div>
-        `;
-
-        vehicleContainer.appendChild(vehicleCard);
-    });
-
-    const firstCard = document.querySelector('.vehicle-card');
-    if (firstCard) {
-        cardWidth = firstCard.getBoundingClientRect().width;
-    } else {
-        cardWidth = 320;
-    }
-
-    handleResize(); // Call handleResize directly after loading vehicles
-    initTouchEvents();
-    initDots();
-    updateCarousel();
-}
-
-function initDots() {
-    dotsContainer.innerHTML = '';
-    const totalSlides = Math.ceil(vehicles.length / itemsPerSlide);
-
-    for (let i = 0; i < totalSlides; i++) {
-        const dot = document.createElement('div');
-        dot.className = 'carousel-dot';
-        if (i === currentIndex) dot.classList.add('active');
-        dot.addEventListener('click', () => goToSlide(i));
-        dotsContainer.appendChild(dot);
-    }
-}
-
-function goToSlide(index) {
-    const totalSlides = Math.ceil(vehicles.length / itemsPerSlide);
-
-    if (index < 0) {
-        currentIndex = totalSlides - 1;
-    } else if (index >= totalSlides) {
-        currentIndex = 0;
-    } else {
-        currentIndex = index;
-    }
-
-    updateCarousel();
-}
-
-function updateCarousel() {
-    const firstCard = document.querySelector('.vehicle-card');
-    if (firstCard) {
-        cardWidth = firstCard.getBoundingClientRect().width;
-    } else {
-        return;
-    }
-
-    const totalCardAndGapWidth = cardWidth + GAP;
-    const offset = -currentIndex * totalCardAndGapWidth * itemsPerSlide;
-
-    carousel.style.transition = 'transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)'; // Use the same smooth transition
-    carousel.style.transform = `translateX(${offset}px)`;
-    currentTranslate = offset;
-    prevTranslate = offset;
-
-    document.querySelectorAll('.carousel-dot').forEach((dot, i) => {
-        dot.classList.toggle('active', i === currentIndex);
-    });
-}
-
-function initTouchEvents() {
-    const carouselOptions = { passive: false };
-
-    carousel.removeEventListener('touchstart', touchStart);
-    carousel.removeEventListener('touchmove', touchMove);
-    carousel.removeEventListener('touchend', touchEnd);
-    carousel.removeEventListener('mousedown', touchStart);
-    carousel.removeEventListener('mousemove', touchMove);
-    carousel.removeEventListener('mouseup', touchEnd);
-    carousel.removeEventListener('mouseleave', touchEnd);
-
-    carousel.addEventListener('touchstart', touchStart, carouselOptions);
-    carousel.addEventListener('touchmove', touchMove, carouselOptions);
-    carousel.addEventListener('touchend', touchEnd);
-    carousel.addEventListener('mousedown', touchStart);
-    carousel.addEventListener('mousemove', touchMove);
-    carousel.addEventListener('mouseup', touchEnd);
-    carousel.addEventListener('mouseleave', touchEnd);
-}
-
-function touchStart(e) {
-    isDragging = true;
-    if (e.type === 'touchstart' || e.type === 'mousedown') {
-        e.preventDefault();
-    }
-
-    startPos = e.touches ? e.touches[0].clientX : e.clientX;
-    carousel.style.transition = 'none';
-    animationID = requestAnimationFrame(animation);
-}
-
-function touchMove(e) {
-    if (isDragging) {
-        if (e.cancelable) {
-            e.preventDefault();
-        }
-
-        const currentPosition = e.touches ? e.touches[0].clientX : e.clientX;
-        const diff = currentPosition - startPos;
-        currentTranslate = prevTranslate + diff;
-    }
-}
-
-function touchEnd() {
-    if (isDragging) {
-        cancelAnimationFrame(animationID);
-        isDragging = false;
-
-        const movedBy = currentTranslate - prevTranslate;
-
-        const firstCard = document.querySelector('.vehicle-card');
-        if (!firstCard) {
-            return;
-        }
-        cardWidth = firstCard.getBoundingClientRect().width;
-
-        const slideMoveThreshold = (cardWidth + GAP) * 0.3;
-        const totalSlides = Math.ceil(vehicles.length / itemsPerSlide);
-
-        if (movedBy < -slideMoveThreshold && currentIndex < totalSlides - 1) {
-            currentIndex++;
-        } else if (movedBy > slideMoveThreshold && currentIndex > 0) {
-            currentIndex--;
-        }
-
-        updateCarousel();
-    }
-}
-
-function animation() {
-    carousel.style.transform = `translateX(${currentTranslate}px)`;
-    if (isDragging) {
-        animationID = requestAnimationFrame(animation);
-    }
-}
-
-prevButton.addEventListener('click', () => goToSlide(currentIndex - 1));
-nextButton.addEventListener('click', () => goToSlide(currentIndex + 1));
-
-function handleResize() {
-    const oldItemsPerSlide = itemsPerSlide;
-    if (window.innerWidth < 768) {
+function setCarouselWidth() {
+    // Determinar itemsPerSlide basado en el ancho de la ventana
+    if (window.innerWidth <= 768) {
         itemsPerSlide = 1;
-    } else if (window.innerWidth < 1024) {
+    } else if (window.innerWidth <= 992) {
         itemsPerSlide = 2;
     } else {
         itemsPerSlide = 3;
     }
 
-    if (oldItemsPerSlide !== itemsPerSlide) {
-        const totalSlides = Math.ceil(vehicles.length / itemsPerSlide);
-        if (currentIndex >= totalSlides) {
-            currentIndex = totalSlides - 1;
-            if (currentIndex < 0) currentIndex = 0;
-        }
-    }
+    // Calcula el ancho de la tarjeta dinámicamente
+    // carousel.clientWidth es el ancho visible del carrusel
+    cardWidth = (carousel.clientWidth - (itemsPerSlide - 1) * GAP) / itemsPerSlide;
 
-    initDots();
-    updateCarousel();
-}
-
-let resizeTimer;
-window.addEventListener('resize', () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(handleResize, 150);
-});
-
-if (menuToggle && navMenu) {
-    menuToggle.addEventListener('click', function() {
-        navMenu.classList.toggle('active');
-        const isExpanded = navMenu.classList.contains('active');
-        this.setAttribute('aria-expanded', isExpanded);
+    // Aplica el ancho calculado a todas las tarjetas
+    document.querySelectorAll('.vehicle-card').forEach(card => {
+        card.style.width = `${cardWidth}px`;
     });
 
+    // Asegúrate de que el índice no se salga de los límites
+    if (currentIndex > vehicles.length - itemsPerSlide) {
+        currentIndex = vehicles.length - itemsPerSlide;
+        if (currentIndex < 0) currentIndex = 0; // Evita índices negativos si hay pocos vehículos
+    }
+    setPositionByIndex();
+    updateDots();
+}
+
+function renderVehicles() {
+    vehicleContainer.innerHTML = ''; // Limpiar el contenedor antes de renderizar
+    vehicles.forEach(vehicle => {
+        const vehicleCard = document.createElement('div');
+        vehicleCard.classList.add('vehicle-card');
+        vehicleCard.setAttribute('data-id', vehicle.id); // Para identificar el vehículo
+
+        vehicleCard.innerHTML = `
+            <img src="${vehicle.image}" alt="${vehicle.name}">
+            <h3>${vehicle.name}</h3>
+            <p class="price">${vehicle.price}</p>
+            <div class="specs">
+                <p><strong>Año:</strong> ${vehicle.year}</p>
+                <p><strong>Transmisión:</strong> ${vehicle.transmission}</p>
+                <p><strong>Combustible:</strong> ${vehicle.fuel}</p>
+            </div>
+            <p>${vehicle.description}</p>
+            <a href="${vehicle.whatsapp}" class="whatsapp-btn" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-whatsapp"></i> Mas información     
+            </a>
+        `;
+        vehicleContainer.appendChild(vehicleCard);
+    });
+    setCarouselWidth(); // Ajustar el ancho de las tarjetas después de renderizar
+}
+
+function setPositionByIndex() {
+    // Calcula la nueva posición de traducción
+    // (cardWidth + GAP) es el ancho total que ocupa una tarjeta más su espacio
+    currentTranslate = -currentIndex * (cardWidth + GAP);
+    setSliderTransform();
+}
+
+function setSliderTransform() {
+    vehicleContainer.style.transform = `translateX(${currentTranslate}px)`;
+}
+
+function moveCarousel(direction) {
+    if (direction === 'next') {
+        if (currentIndex < vehicles.length - itemsPerSlide) {
+            currentIndex++;
+        } else {
+            // Opcional: volver al inicio o detenerse
+            currentIndex = 0; // Vuelve al inicio
+        }
+    } else { // direction === 'prev'
+        if (currentIndex > 0) {
+            currentIndex--;
+        } else {
+            // Opcional: ir al final o detenerse
+            currentIndex = vehicles.length - itemsPerSlide; // Va al final
+            if (currentIndex < 0) currentIndex = 0; // Evita índices negativos
+        }
+    }
+    setPositionByIndex();
+    updateDots();
+}
+
+// --- Puntos del Carrusel (Dots) ---
+function createDots() {
+    dotsContainer.innerHTML = '';
+    const numDots = Math.ceil(vehicles.length / itemsPerSlide); // Número de grupos de vehículos
+    for (let i = 0; i < numDots; i++) {
+        const dot = document.createElement('span');
+        dot.classList.add('dot');
+        dot.setAttribute('data-index', i);
+        dot.addEventListener('click', () => {
+            currentIndex = i * itemsPerSlide;
+            // Asegura que currentIndex no exceda el límite máximo
+            if (currentIndex > vehicles.length - itemsPerSlide) {
+                currentIndex = vehicles.length - itemsPerSlide;
+            }
+            if (currentIndex < 0) currentIndex = 0; // Evita negativos
+            setPositionByIndex();
+            updateDots();
+        });
+        dotsContainer.appendChild(dot);
+    }
+}
+
+function updateDots() {
+    document.querySelectorAll('.dot').forEach((dot, index) => {
+        // Un dot está activo si el currentIndex cae dentro del "grupo" que representa
+        const dotIndex = parseInt(dot.getAttribute('data-index'));
+        const startOfGroup = dotIndex * itemsPerSlide;
+        const endOfGroup = startOfGroup + itemsPerSlide - 1;
+
+        if (currentIndex >= startOfGroup && currentIndex <= endOfGroup) {
+             dot.classList.add('active');
+        } else {
+            dot.classList.remove('active');
+        }
+        // Pequeño ajuste para el último dot si el número de vehículos no es múltiplo
+        if (currentIndex === vehicles.length - itemsPerSlide && dotIndex === Math.floor((vehicles.length - 1) / itemsPerSlide)) {
+             dot.classList.add('active');
+        }
+    });
+}
+
+
+// --- Eventos del Carrusel (Swipe en Móvil) ---
+function touchStart(event) {
+    isDragging = true;
+    startPos = event.touches[0].clientX;
+    prevTranslate = currentTranslate;
+    // Detener la animación para que el arrastre sea suave
+    cancelAnimationFrame(animationID);
+    vehicleContainer.style.transition = 'none'; // Quitar transición CSS durante el arrastre
+}
+
+function touchMove(event) {
+    if (!isDragging) return;
+    const currentTouchPos = event.touches[0].clientX;
+    const delta = currentTouchPos - startPos;
+    currentTranslate = prevTranslate + delta;
+
+    // Limitar el arrastre para que no se desplace demasiado
+    const maxTranslate = 0;
+    const minTranslate = -(vehicles.length * (cardWidth + GAP) - carousel.clientWidth);
+
+    if (currentTranslate > maxTranslate) {
+        currentTranslate = maxTranslate;
+    } else if (currentTranslate < minTranslate) {
+        currentTranslate = minTranslate;
+    }
+
+    setSliderTransform();
+}
+
+function touchEnd() {
+    if (!isDragging) return;
+    isDragging = false;
+    vehicleContainer.style.transition = 'transform 0.3s ease-out'; // Volver a añadir transición
+
+    const movedBy = currentTranslate - prevTranslate;
+
+    // Determinar si avanzó o retrocedió lo suficiente para cambiar de slide
+    if (movedBy < -cardWidth / 4 && currentIndex < vehicles.length - itemsPerSlide) {
+        currentIndex++;
+    } else if (movedBy > cardWidth / 4 && currentIndex > 0) {
+        currentIndex--;
+    }
+    
+    // Ajustar el currentIndex para el último grupo de tarjetas
+    if (currentIndex > vehicles.length - itemsPerSlide) {
+        currentIndex = vehicles.length - itemsPerSlide;
+        if (currentIndex < 0) currentIndex = 0; // Asegura que no sea negativo
+    }
+    
+    setPositionByIndex(); // Ajustar a la posición final de la tarjeta
+    updateDots(); // Actualizar los puntos
+}
+
+
+// --- Inicialización y Event Listeners ---
+
+document.addEventListener('DOMContentLoaded', () => {
+    renderVehicles(); // Renderiza los vehículos al cargar la página
+    createDots(); // Crea los puntos
+    updateDots(); // Actualiza el estado de los puntos
+
+    // Botones de navegación del carrusel
+    prevButton.addEventListener('click', () => moveCarousel('prev'));
+    nextButton.addEventListener('click', () => moveCarousel('next'));
+
+    // Eventos para el arrastre (swipe) en dispositivos táctiles
+    vehicleContainer.addEventListener('touchstart', touchStart);
+    vehicleContainer.addEventListener('touchmove', touchMove);
+    vehicleContainer.addEventListener('touchend', touchEnd);
+    
+    // Evento de resize para ajustar el carrusel a diferentes tamaños de pantalla
+    window.addEventListener('resize', () => {
+        // Pequeño debounce para el resize para evitar recálculos excesivos
+        clearTimeout(window.resizeTimeout);
+        window.resizeTimeout = setTimeout(() => {
+            setCarouselWidth();
+            createDots(); // Volver a crear los dots por si cambia itemsPerSlide
+            updateDots();
+        }, 250);
+    });
+
+    // Menú de navegación móvil
+    menuToggle.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+        menuToggle.querySelector('i').classList.toggle('fa-bars');
+        menuToggle.querySelector('i').classList.toggle('fa-times');
+    });
+
+    // Cerrar el menú al hacer clic en un enlace (solo en móvil)
     navMenu.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', () => {
             if (navMenu.classList.contains('active')) {
                 navMenu.classList.remove('active');
-                menuToggle.setAttribute('aria-expanded', false);
+                menuToggle.querySelector('i').classList.remove('fa-times');
+                menuToggle.querySelector('i').classList.add('fa-bars');
             }
         });
     });
-}
-
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const targetId = this.getAttribute('href');
-        const targetElement = document.querySelector(targetId);
-        if (targetElement) {
-            targetElement.scrollIntoView({
-                behavior: 'smooth'
-            });
-            if (navMenu && navMenu.classList.contains('active')) {
-                navMenu.classList.remove('active');
-                menuToggle.setAttribute('aria-expanded', false);
-            }
-        }
-    });
-});
-
-window.addEventListener('scroll', function() {
-    const header = document.querySelector('header');
-    if (header) {
-        if (window.scrollY > 50) {
-            header.classList.add('header-scrolled');
-        } else {
-            header.classList.remove('header-scrolled');
-        }
-    }
-});
-
-document.addEventListener('DOMContentLoaded', () => {
-    loadVehicles();
 });
