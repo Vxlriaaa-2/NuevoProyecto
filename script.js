@@ -1,4 +1,27 @@
-document.addEventListener('DOMContentLoaded', function() {
+// Add Google Fonts dynamically
+const link = document.createElement('link');
+link.href = 'https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Open+Sans:wght@400;600&display=swap';
+link.rel = 'stylesheet';
+document.head.appendChild(link);
+
+const vehicleContainer = document.getElementById('vehicleContainer');
+const prevButton = document.querySelector('.carousel-button.prev');
+const nextButton = document.querySelector('.carousel-button.next');
+const dotsContainer = document.querySelector('.carousel-dots');
+const carousel = document.querySelector('.carousel');
+const menuToggle = document.querySelector('.menu-toggle');
+const navMenu = document.querySelector('nav ul');
+
+let currentIndex = 0;
+let itemsPerSlide = 3;
+let isDragging = false;
+let startPos = 0;
+let currentTranslate = 0;
+let prevTranslate = 0;
+let animationID = 0;
+let cardWidth = 0;
+const GAP = 20;
+
     // Datos de los vehículos
     const vehicles = [
         {
@@ -113,27 +136,10 @@ document.addEventListener('DOMContentLoaded', function() {
         },
     ];
 
-   const vehicleContainer = document.getElementById('vehicleContainer');
-const prevButton = document.querySelector('.carousel-button.prev');
-const nextButton = document.querySelector('.carousel-button.next');
-const dotsContainer = document.querySelector('.carousel-dots');
-const carousel = document.querySelector('.carousel');
-const menuToggle = document.querySelector('.menu-toggle');
-const navMenu = document.querySelector('nav ul');
-
-let currentIndex = 0;
-let itemsPerSlide = 3;
-let isDragging = false;
-let startPos = 0;
-let currentTranslate = 0;
-let prevTranslate = 0;
-let animationID = 0;
-let cardWidth = 0;
-const GAP = 20;
-
+  
 function loadVehicles() {
     vehicleContainer.innerHTML = '';
-    
+
     vehicles.forEach(vehicle => {
         if (!vehicle.image) {
             console.warn(`Vehículo "${vehicle.name}" no tiene una propiedad 'image'. Saltando.`);
@@ -142,7 +148,7 @@ function loadVehicles() {
 
         const vehicleCard = document.createElement('div');
         vehicleCard.className = 'vehicle-card';
-        
+
         const imageHtml = `<img src="${vehicle.image}" alt="${vehicle.name}" onerror="this.onerror=null;this.src='https://via.placeholder.com/300x200?text=Imagen+no+disponible';this.alt='Imagen no disponible';">`;
 
         vehicleCard.innerHTML = `
@@ -163,10 +169,10 @@ function loadVehicles() {
                 </a>
             </div>
         `;
-        
+
         vehicleContainer.appendChild(vehicleCard);
     });
-    
+
     const firstCard = document.querySelector('.vehicle-card');
     if (firstCard) {
         cardWidth = firstCard.getBoundingClientRect().width;
@@ -174,6 +180,7 @@ function loadVehicles() {
         cardWidth = 320;
     }
 
+    handleResize(); // Call handleResize directly after loading vehicles
     initTouchEvents();
     initDots();
     updateCarousel();
@@ -182,7 +189,7 @@ function loadVehicles() {
 function initDots() {
     dotsContainer.innerHTML = '';
     const totalSlides = Math.ceil(vehicles.length / itemsPerSlide);
-    
+
     for (let i = 0; i < totalSlides; i++) {
         const dot = document.createElement('div');
         dot.className = 'carousel-dot';
@@ -194,7 +201,7 @@ function initDots() {
 
 function goToSlide(index) {
     const totalSlides = Math.ceil(vehicles.length / itemsPerSlide);
-    
+
     if (index < 0) {
         currentIndex = totalSlides - 1;
     } else if (index >= totalSlides) {
@@ -202,7 +209,7 @@ function goToSlide(index) {
     } else {
         currentIndex = index;
     }
-    
+
     updateCarousel();
 }
 
@@ -217,11 +224,11 @@ function updateCarousel() {
     const totalCardAndGapWidth = cardWidth + GAP;
     const offset = -currentIndex * totalCardAndGapWidth * itemsPerSlide;
 
-    carousel.style.transition = 'transform 0.5s ease';
+    carousel.style.transition = 'transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)'; // Use the same smooth transition
     carousel.style.transform = `translateX(${offset}px)`;
     currentTranslate = offset;
     prevTranslate = offset;
-    
+
     document.querySelectorAll('.carousel-dot').forEach((dot, i) => {
         dot.classList.toggle('active', i === currentIndex);
     });
@@ -252,7 +259,7 @@ function touchStart(e) {
     if (e.type === 'touchstart' || e.type === 'mousedown') {
         e.preventDefault();
     }
-    
+
     startPos = e.touches ? e.touches[0].clientX : e.clientX;
     carousel.style.transition = 'none';
     animationID = requestAnimationFrame(animation);
@@ -274,15 +281,15 @@ function touchEnd() {
     if (isDragging) {
         cancelAnimationFrame(animationID);
         isDragging = false;
-        
+
         const movedBy = currentTranslate - prevTranslate;
-        
+
         const firstCard = document.querySelector('.vehicle-card');
         if (!firstCard) {
             return;
         }
         cardWidth = firstCard.getBoundingClientRect().width;
-        
+
         const slideMoveThreshold = (cardWidth + GAP) * 0.3;
         const totalSlides = Math.ceil(vehicles.length / itemsPerSlide);
 
@@ -291,7 +298,7 @@ function touchEnd() {
         } else if (movedBy > slideMoveThreshold && currentIndex > 0) {
             currentIndex--;
         }
-        
+
         updateCarousel();
     }
 }
@@ -323,22 +330,29 @@ function handleResize() {
             if (currentIndex < 0) currentIndex = 0;
         }
     }
-    
+
     initDots();
     updateCarousel();
 }
 
-window.addEventListener('resize', handleResize);
+let resizeTimer;
+window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(handleResize, 150);
+});
 
 if (menuToggle && navMenu) {
     menuToggle.addEventListener('click', function() {
         navMenu.classList.toggle('active');
+        const isExpanded = navMenu.classList.contains('active');
+        this.setAttribute('aria-expanded', isExpanded);
     });
 
     navMenu.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', () => {
             if (navMenu.classList.contains('active')) {
                 navMenu.classList.remove('active');
+                menuToggle.setAttribute('aria-expanded', false);
             }
         });
     });
@@ -355,6 +369,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             });
             if (navMenu && navMenu.classList.contains('active')) {
                 navMenu.classList.remove('active');
+                menuToggle.setAttribute('aria-expanded', false);
             }
         }
     });
@@ -371,7 +386,6 @@ window.addEventListener('scroll', function() {
     }
 });
 
-loadVehicles();
+document.addEventListener('DOMContentLoaded', () => {
+    loadVehicles();
 });
-
-handleResize();

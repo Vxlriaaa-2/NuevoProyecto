@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
+     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mitsubishi - Asesor</title>
+    <title>Asesor de Ventas Mitsubishi - Gerardo</title>
+    <link rel="icon" href="/path/to/your/favicon.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
 
@@ -14,30 +16,41 @@
 
 
     <header>
-        <div class="logo-container">
-            <img src="images/mitsubishi-logo.png" alt="Logo Mitsubishi" class="logo">
-            <h1> Mitsubishi Zacatecas</h1>
-        </div>
-        <nav>
+    <div class="container"> 
+        <nav id="mainNav">
             <ul>
                 <li><a href="#inicio">Inicio</a></li>
                 <li><a href="#vehiculos">Vehículos</a></li>
-                <li><a href="#vendedor">Tu Vendedor</a></li>
+                <li><a href="#vendedor">Asesor</a></li>
                 <li><a href="#ubicacion">Ubicación</a></li>
             </ul>
         </nav>
-    </header>
+        
+        <a href="https://wa.me/+524924933151" class="btn-whatsapp-header">
+            <i class="fab fa-whatsapp"></i> WhatsApp
+        </a>
+        
+        <button class="menu-toggle" id="menuToggle">
+            <i class="fas fa-bars"></i>
+        </button>
+    </div>
+</header>
 
 
 
     <main>
         <section id="inicio" class="hero">
-            <div class="hero-content">
-                <h2>Descubre la nueva generación de Mitsubishi</h2>
-                <p>Calidad, innovación y rendimiento en cada modelo</p>
+    <div class="container">
+        <div class="hero-content">
+            <h2>Descubre la nueva generación de Mitsubishi</h2>
+            <p>Calidad, innovación y rendimiento en cada modelo</p>
+            <div class="hero-buttons">
                 <a href="#vehiculos" class="btn">Ver modelos</a>
+                
             </div>
-        </section>
+        </div>
+    </div>
+</section>
 
         <section id="vehiculos" class="vehicles">
     <h2>Nuestros Vehículos</h2>
@@ -110,9 +123,9 @@
         </div>
         <div class="footer-col footer-contact">
             <h3>Contacto</h3>
-            <p><i class="fas fa-phone"></i> +52 492 493 3151</p>
-            <p><i class="fas fa-envelope"></i> gerure3mar@hotmail.com</p>
-            <p><i class="fas fa-map-marker-alt"></i> Calz. Revolución Mexicana 1A, Guadalupe, Zac.</p>
+            <p><i class="fas fa-phone"></i>+52 492 493 3151</p>
+            <p><i class="fas fa-envelope"></i>gerure3mar@hotmail.com</p>
+            <p><i class="fas fa-map-marker-alt"></i>Calz.Revolución Mexicana 1A,Guadalupe,Zac.</p>
         </div>
         <div class="footer-col footer-social"> <h3>Síguenos</h3>
             <div class="social-icons">
@@ -132,8 +145,38 @@
 <script>
     // Script simple para actualizar el año automáticamente en el footer
     document.getElementById('current-year').textContent = new Date().getFullYear();
+    document.addEventListener('DOMContentLoaded', function() {
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navUl = document.querySelector('nav ul');
+
+    if (menuToggle && navUl) {
+        menuToggle.addEventListener('click', function() {
+            navUl.classList.toggle('active');
+        });
+
+        // Opcional: Cerrar menú si se hace clic en un enlace
+        navUl.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', function() {
+                navUl.classList.remove('active');
+            });
+        });
+    }
+
+    // JavaScript para el Header scrolled (si no lo tienes)
+    const header = document.querySelector('header');
+    if (header) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) { // Cuando el scroll es mayor a 50px
+                header.classList.add('header-scrolled');
+            } else {
+                header.classList.remove('header-scrolled');
+            }
+        });
+    }
+});
 </script>
 
     <script src="script.js"></script>
+    
 </body>
 </html>

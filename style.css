@@ -1,14 +1,35 @@
 :root {
-    --primary-color: #e60012; 
-    --primary-hover-color: #c5000f; 
-    --secondary-color: #333;
-    --light-color: #f8f9fa;
-    --dark-color: #212529;
-    --gray-color: #6c757d;
-    --border-color: #e0e0e0; 
+    
+    --color-dark-navy: #071739;   
+    --color-blue-steel: #4B6382;  
+    --color-light-blue: #A4B5C4; 
+    --color-extra-light-blue: #CDD5DB; 
+    --color-tan-medium: #A68868;  
+    --color-tan-light: #E3C39D;  
+
+    
+    --color-background-primary: var(--color-extra-light-blue); 
+    --color-surface-light: #FFFFFF; 
+    --color-text-header: var(--color-dark-navy); 
+    --color-text-body: var(--color-blue-steel);
+    --color-accent: var(--color-dark-navy); 
+    --color-accent-hover: #172C52;
+    --color-link-hover: var(--color-blue-steel); 
+    --color-border-subtle: var(--color-light-blue);
+
+    
     --whatsapp-color: #25D366; 
     --whatsapp-hover-color: #128C7E; 
+
+    
+    --shadow-light: rgba(0, 0, 0, 0.04);
+    --shadow-medium: rgba(0, 0, 0, 0.08);
+    --shadow-strong: rgba(0, 0, 0, 0.15);
+
+    
+    --font-primary: 'Inter', sans-serif; 
 }
+
 
 * {
     margin: 0;
@@ -16,26 +37,44 @@
     box-sizing: border-box;
 }
 
-body, html {
-    font-family: 'Arial', sans-serif;
-    line-height: 1.6;
-    color: var(--dark-color);
-    overflow-x: hidden;
+html {
     scroll-behavior: smooth; 
 }
 
+body {
+    font-family: var(--font-primary);
+    line-height: 1.6; 
+    color: var(--color-text-body);
+    overflow-x: hidden; 
+    background-color: var(--color-background-primary);
+    min-height: 100vh; 
+    display: flex; 
+    flex-direction: column; 
+}
+
 h1, h2, h3, h4 {
+    font-family: var(--font-primary);
     margin-bottom: 1rem;
-    color: var(--dark-color); 
+    color: white;
+    font-weight: 700;
+    letter-spacing: -0.02em; 
 }
 
 p {
-    margin-bottom: 1rem;
+    margin-bottom: 0.8rem;
+    color: var(--color-text-body);
+    font-weight: 400;
 }
 
 a {
     text-decoration: none;
-    color: var(--primary-color);
+    color: var(--color-accent);
+    transition: color 0.2s ease-in-out, transform 0.1s ease-in-out; 
+}
+
+a:hover {
+    color: var(--color-link-hover);
+    transform: translateY(-2px);
 }
 
 ul {
@@ -44,375 +83,681 @@ ul {
 
 img {
     max-width: 100%;
-    height: auto; 
+    height: auto;
     display: block; 
 }
 
+main {
+    flex-grow: 1; 
+}
+
 .container {
-    width: 90%;
-    max-width: 1200px;
-    margin: 0 auto;
+    width: 90%; 
+    max-width: 1300px; 
+    margin: 0 auto; 
     padding: 0 15px;
 }
 
 .btn {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: var(--primary-color); 
+    display: inline-flex; 
+    align-items: center;
+    justify-content: center;
+    padding: 14px 30px;
+    background-color: var(--color-accent);
     color: white;
-    border-radius: 5px;
-    transition: all 0.3s ease;
+    border-radius: 6px;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); 
+    text-align: center;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 10px var(--shadow-light);
+    cursor: pointer;
+    border: none;
+    font-size: 0.95rem;
+    white-space: nowrap; 
 }
 
 .btn:hover {
-    background-color: var(--primary-hover-color); 
-    transform: translateY(-2px);
+    background-color: var(--color-accent-hover);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 18px var(--shadow-medium);
 }
 
-.btn-whatsapp {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: var(--whatsapp-color); 
+
+.btn-primary {
+ 
+}
+
+
+.btn-whatsapp-hero {
+    background-color: var(--whatsapp-color);
     color: white;
-    border-radius: 5px;
-    transition: all 0.3s ease;
-    margin-top: 1rem;
+    padding: 16px 35px; 
+    border-radius: 6px;
+    margin-top: 1.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 10px var(--shadow-light);
+    cursor: pointer;
+    border: none;
+    font-size: 1.1em;
+    white-space: nowrap;
 }
 
-.btn-whatsapp:hover {
-    background-color: var(--whatsapp-hover-color); 
-    transform: translateY(-2px);
+.btn-whatsapp-hero:hover {
+    background-color: var(--whatsapp-hover-color);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 18px var(--shadow-medium);
 }
+
+.btn i, .btn-whatsapp-hero i {
+    margin-right: 10px;
+    font-size: 1.1em;
+}
+
 
 header {
-    background-color: white;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    position: sticky;
+    background-color: var(--color-surface-light);
+    box-shadow: 0 2px 8px var(--shadow-light);
+    position: sticky; 
     top: 0;
-    z-index: 100;
-    display: flex; 
-    justify-content: space-between; 
+    z-index: 100; 
+    display: flex;
+    justify-content: center; 
     align-items: center; 
-    padding: 15px 20px; 
+    padding: 20px 0; 
+    transition: all 0.2s ease-in-out;
+    width: 100%; 
 }
 
+
 .header-scrolled {
-    padding: 10px 20px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    padding: 16px 0;
+    box-shadow: 0 3px 12px var(--shadow-medium);
+}
+
+
+header .container {
+    display: flex;
+   
+    justify-content: center;
+    align-items: center;
+    width: 100%; 
+    padding: 0 15px; 
+    gap: 30px; 
 }
 
 .logo-container {
     display: flex;
     align-items: center;
+   
+    flex-shrink: 1;
 }
 
 .logo {
-    height: 50px;
+    height: 65px; 
     margin-right: 15px;
+    flex-shrink: 0; 
 }
 
-.logo-container h1 { 
+.logo-container h1 {
     margin: 0;
-    font-size: 1.8rem;
-    color: var(--secondary-color);
+    font-size: 2.5rem;
+    color: var(--color-text-header);
+    white-space: nowrap; 
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.2; 
 }
+
 
 nav ul {
     display: flex; 
     list-style: none;
     margin: 0;
-    padding: 0; 
+    padding: 0;
+    
+    flex-shrink: 0;
 }
 
 nav ul li {
-    margin: 0 15px;
+    margin: 0 20px;
 }
 
 nav ul li a {
-    color: var(--secondary-color);
-    font-weight: 600;
-    text-decoration: none; 
-    transition: color 0.3s ease;
+    color: var(--color-blue-steel);
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.2s ease-in-out, transform 0.1s ease-in-out;
+    padding-bottom: 6px;
+    position: relative;
+    font-size: 1em;
 }
 
-nav ul li a:hover {
-    color: var(--primary-color); 
+
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 0;
+    height: 3px;
+    background-color: var(--color-accent);
+    transform: translateX(-50%);
+    transition: width 0.3s ease-in-out;
+    border-radius: 2px;
 }
+
+nav ul li a:hover::after,
+nav ul li a.active::after {
+    width: 100%;
+}
+
+nav ul li a:hover,
+nav ul li a.active {
+    color: var(--color-text-header);
+    transform: translateY(-2px);
+}
+
+
+.btn-whatsapp-header {
+    background-color: var(--whatsapp-color);
+    color: white;
+    padding: 8px 15px; 
+    border-radius: 5px;
+    margin-left: 20px; 
+    display: inline-flex;
+    align-items: center;
+    transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+    font-weight: 600;
+    font-size: 0.9em;
+    white-space: nowrap;
+    line-height: 1; 
+    box-shadow: 0 2px 5px var(--shadow-light); 
+}
+
+.btn-whatsapp-header:hover {
+    background-color: var(--whatsapp-hover-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px var(--shadow-medium);
+}
+
+.btn-whatsapp-header i {
+    margin-right: 8px;
+    font-size: 1.1em;
+}
+
 
 .menu-toggle {
     display: none; 
     background: none;
     border: none;
-    font-size: 2rem;
-    color: var(--secondary-color);
+    font-size: 2.5rem; 
+    color: var(--color-text-header);
     cursor: pointer;
     padding: 5px 10px;
     z-index: 101; 
+    position: relative;
+    transition: transform 0.2s ease;
+}
+
+.menu-toggle:hover {
+    transform: scale(1.1);
 }
 
 .hero {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
-                url('images/6ec551e8-77e7e735.gif');
-    background-size: cover;
-    background-position: center;
-    color: white;
-    text-align: center;
-    padding: 20px; 
-    margin-bottom: 0; 
-    height: 100vh; 
-    width: 100vw; 
-    display: flex; 
-    flex-direction: column; 
-    justify-content: center; 
+    position: relative;
+    width: 100%;
+    min-height: 90vh;
+    display: flex;
     align-items: center;
-    overflow: hidden; 
+    justify-content: center;
+    text-align: center;
+    background: linear-gradient(135deg, rgba(7, 23, 57, 0.9) 0%, rgba(75, 99, 130, 0.9) 100%),
+                url('https://example.com/tu-imagen-mitsubishi.jpg') center/cover no-repeat fixed;
+    color: white;
+    padding: 80px 20px;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: -1;
+}
+
+.hero .container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+    z-index: 2;
+}
+
+.hero-content {
+    max-width: 900px;
+    margin: 0 auto;
+    animation: fadeInUp 0.8s ease-out 0.3s both;
 }
 
 .hero h2 {
-    font-size: 2.5rem;
+    font-size: clamp(2.5rem, 5vw, 4rem);
     margin-bottom: 20px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); 
-    color: white; 
+    line-height: 1.2;
+    text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.4);
+    font-weight: 700;
+    letter-spacing: -0.02em;
 }
 
 .hero p {
-    font-size: 1.2rem;
-    margin-bottom: 30px;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); 
-    color: white; 
+    font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+    margin-bottom: 40px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+    font-weight: 300;
+    line-height: 1.6;
+    opacity: 0.9;
 }
 
+.hero-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+.hero .btn {
+    background-color: var(--color-accent);
+    color: white;
+    padding: 15px 35px;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.hero .btn:hover {
+    background-color: transparent;
+    color: white;
+    border-color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.btn-whatsapp-hero {
+    background-color: #25D366;
+    color: white;
+    padding: 15px 35px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.btn-whatsapp-hero:hover {
+    background-color: transparent;
+    border-color: #25D366;
+    color: #25D366;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.btn-whatsapp-hero i {
+    margin-right: 10px;
+    font-size: 1.3rem;
+}
+
+/* ANIMACIONES */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* EFECTO PARALLAX (OPCIONAL) */
+@media (min-width: 992px) {
+    .hero {
+        background-attachment: fixed;
+    }
+}
+
+/* RESPONSIVE ADJUSTMENTS */
+@media (max-width: 992px) {
+    .hero {
+        min-height: 80vh;
+        background-attachment: scroll;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero {
+        min-height: 75vh;
+        padding: 60px 15px;
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+    
+    .hero .btn,
+    .btn-whatsapp-hero {
+        width: 100%;
+        max-width: 280px;
+        padding: 12px 25px;
+    }
+    
+    .hero h2 {
+        font-size: 2.3rem;
+    }
+    
+    .hero p {
+        font-size: 1.2rem;
+        margin-bottom: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero {
+        min-height: 70vh;
+    }
+    
+    .hero h2 {
+        font-size: 2rem;
+    }
+    
+    .hero p {
+        font-size: 1.1rem;
+    }
+    
+    .hero-buttons {
+        margin-top: 20px;
+    }
+}
+
+
+/* Sección de Vehículos */
 .vehicles {
-    padding: 50px 0;
-    background-color: var(--light-color);
+    padding: 80px 0;
+    background-color: var(--color-background-primary);
 }
 
 .vehicles h2 {
     text-align: center;
-    margin-bottom: 40px;
-    font-size: 2rem;
-    color: var(--secondary-color); 
+    margin-bottom: 60px;
+    font-size: 3rem;
+    color: var(--color-text-header);
 }
 
-.vehicle-grid-static { 
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 30px;
-}
 
 .carousel-container {
-    position: relative;
-    max-width: 1200px;
+    position: relative; 
+    max-width: 1300px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 50px; 
     overflow: hidden; 
-    margin-top: 20px; 
-    min-height: 350px; 
+    margin-top: 20px;
+    min-height: 480px; 
 }
 
+
 .carousel {
-    display: flex; 
-    transition: transform 0.5s ease;
-    -webkit-transform: translate3d(0,0,0);
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    -webkit-transform: translate3d(0,0,0); 
     transform: translate3d(0,0,0);
 }
 
-#vehicleContainer.vehicle-grid { 
+#vehicleContainer.vehicle-grid {
     display: flex;
     flex-wrap: nowrap; 
-    gap: 20px;
-    padding: 20px 0; 
+    gap: 25px; 
+    padding: 15px 0;
     align-items: stretch; 
 }
 
+
 .vehicle-card {
     flex: 0 0 auto; 
-    width: 300px;
+    width: 350px; 
     min-width: 280px; 
-    max-width: 350px; 
-    box-sizing: border-box; 
-    background-color: #fff;
-    border: 1px solid var(--border-color); 
+    max-width: 380px; 
+    box-sizing: border-box;
+    background-color: var(--color-surface-light);
     border-radius: 8px;
-    padding: 20px;
-    text-align: center; 
+    padding: 25px;
+    text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: space-between; 
-    transition: transform 0.3s ease, box-shadow 0.3s ease; 
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08); 
+    transition: transform 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
+    box-shadow: 0 8px 25px var(--shadow-light);
+    border: 1px solid var(--color-border-subtle);
 }
 
 .vehicle-card:hover {
-    transform: translateY(-5px); 
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px var(--shadow-medium);
+    border-color: var(--color-accent);
 }
 
 .vehicle-image {
-    height: 180px; 
-    overflow: hidden; 
+    height: 220px;
+    overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 15px; 
-    background-color: #f0f0f0; 
-    border-radius: 4px; 
+    margin-bottom: 20px;
+    background-color: var(--color-light-blue); 
+    border-radius: 6px;
+    border: 1px solid var(--color-border-subtle);
 }
 
 .vehicle-card img {
     max-width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover; 
     transition: transform 0.3s ease;
 }
 
 .vehicle-card:hover .vehicle-image img {
-    transform: scale(1.05);
+    transform: scale(1.1); 
 }
 
 .vehicle-card h3 {
-    font-size: 1.2em;
-    margin-bottom: 10px;
-    min-height: 2.4em;
+    font-size: 1.5em;
+    margin-bottom: 12px;
+    min-height: 3em; 
     line-height: 1.2;
-    color: var(--secondary-color);
+    color: var(--color-text-header);
+    font-weight: 600;
 }
 
 .vehicle-card p {
-    font-size: 0.9em;
-    color: var(--gray-color);
-    margin-bottom: 15px;
-    flex-grow: 1;
+    font-size: 1em;
+    color: var(--color-text-body);
+    margin-bottom: 20px;
+    flex-grow: 1; 
 }
 
 .vehicle-card .vehicle-features {
     display: flex;
     justify-content: center;
     gap: 10px;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     flex-wrap: wrap;
 }
 
 .vehicle-card .vehicle-features span {
-    background-color: var(--light-color);
-    padding: 5px 10px;
-    border-radius: 3px;
-    font-size: 0.8em;
-    color: var(--dark-color);
+    background-color: var(--color-background-primary);
+    padding: 7px 14px;
+    border-radius: 18px; 
+    font-size: 0.85em;
+    color: var(--color-blue-steel);
     white-space: nowrap;
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--color-border-subtle);
+    font-weight: 500;
 }
 
 .vehicle-card .vehicle-price {
-    font-size: 1.5em;
-    font-weight: bold;
-    color: var(--primary-color);
-    margin-top: auto;
-    margin-bottom: 15px;
+    font-size: 2em;
+    font-weight: 700;
+    color: var(--color-accent);
+    margin-top: auto; 
+    margin-bottom: 20px;
+    letter-spacing: -0.02em;
 }
 
 .vehicle-card .btn {
-    background-color: var(--whatsapp-color);
+    background-color: var(--color-accent);
     color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    text-decoration: none;
-    display: inline-block; 
-    margin-top: 10px; 
-    transition: background-color 0.3s ease, transform 0.3s ease;
+    padding: 12px 28px;
+    font-size: 0.9em;
+    box-shadow: 0 3px 10px var(--shadow-light);
 }
 
 .vehicle-card .btn:hover {
-    background-color: var(--whatsapp-hover-color);
+    background-color: var(--color-accent-hover);
     transform: translateY(-2px);
+    box-shadow: 0 6px 15px var(--shadow-medium);
 }
+
 
 .carousel-button {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(230, 0, 18, 0.7);
-    color: white;
+    background: var(--color-surface-light);
+    color: var(--color-text-header);
     border: none;
     border-radius: 50%;
-    width: 45px;
-    height: 45px;
-    font-size: 1.5rem;
+    width: 55px;
+    height: 55px;
+    font-size: 2rem;
     cursor: pointer;
     z-index: 10;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: all 0.25s ease-in-out;
+    box-shadow: 0 4px 15px var(--shadow-medium);
 }
 
 .carousel-button:hover {
-    background: var(--primary-hover-color);
+    background: var(--color-accent);
+    color: white;
     transform: translateY(-50%) scale(1.05);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 8px 20px var(--shadow-strong);
 }
 
 .carousel-button.prev {
-    left: 5px;
+    left: 0; 
 }
 
 .carousel-button.next {
-    right: 5px;
+    right: 0; 
 }
+
 
 .carousel-dots {
     display: flex;
     justify-content: center;
-    padding: 20px 0;
-    gap: 10px;
+    padding: 30px 0;
+    gap: 15px;
 }
 
 .carousel-dot {
-    width: 12px;
-    height: 12px;
+    width: 15px;
+    height: 15px;
     border-radius: 50%;
-    background: #ccc;
+    background: var(--color-light-blue);
     cursor: pointer;
-    transition: all 0.3s ease;
-    border: 1px solid var(--gray-color);
+    transition: all 0.2s ease-in-out;
+    border: 2px solid transparent;
 }
 
 .carousel-dot.active {
-    background: var(--primary-color);
-    transform: scale(1.2);
-    border-color: var(--primary-color);
+    background: var(--color-dark-navy);
+    transform: scale(1.1);
+    border-color: var(--color-dark-navy);
 }
 
+/* Sección Vendedor */
 .seller {
-    padding: 60px 20px;
-    background-color: var(--light-color);
+    padding: 100px 20px;
+    background-color: var(--color-surface-light);
     text-align: center;
+    box-shadow: inset 0 3px 15px var(--shadow-light);
+    border-top: 1px solid var(--color-border-subtle);
+    border-bottom: 1px solid var(--color-border-subtle);
 }
 
-.seller h2, .seller h3, .seller p {
-    color: var(--secondary-color);
+.seller h2 {
+    font-size: 3em;
+    color: var(--color-text-header);
+    margin-bottom: 25px;
+}
+
+.seller h3 {
+    font-size: 1.8em;
+    color: var(--color-text-header);
+    margin-bottom: 30px;
+    font-weight: 600;
 }
 
 .seller-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: column; 
     align-items: center;
     justify-content: center;
-    max-width: 900px;
+    max-width: 1000px;
     margin: 0 auto;
-    gap: 40px;
+    gap: 50px;
 }
 
 .seller-image {
-    width: 200px;
-    height: 200px;
+    width: 250px;
+    height: 250px;
     border-radius: 50%;
     overflow: hidden;
-    border: 5px solid var(--dark-color);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border: 6px solid var(--color-accent);
+    box-shadow: 0 10px 30px var(--shadow-medium);
     flex-shrink: 0;
 }
 
@@ -424,108 +769,223 @@ nav ul li a:hover {
 }
 
 .seller-info {
-    max-width: 500px;
+    max-width: 600px;
     flex-grow: 1;
 }
 
-.seller-info h2 {
-    font-size: 2.2em;
-    color: var(--secondary-color);
-    margin-bottom: 10px;
-}
-
-.seller-info h3 {
-    font-size: 1.6em;
-    color: var(--gray-color);
-    margin-bottom: 15px;
-}
-
 .seller-info p {
+    font-size: 1.15em;
+    line-height: 1.7;
+    color: var(--color-text-body);
+    margin-bottom: 30px;
+}
+
+.contact-info p {
     font-size: 1.1em;
-    line-height: 1.6;
-    color: var(--gray-color);
-    margin-bottom: 20px;
+    color: var(--color-text-header);
+    margin-bottom: 10px;
+    font-weight: 500;
 }
 
-.seller-info .contact-info p {
+.contact-info i {
+    color: var(--color-accent);
+    margin-right: 15px;
     font-size: 1em;
-    color: var(--dark-color);
-    margin-bottom: 8px;
 }
 
-.seller-info .contact-info i {
-    color: var(--primary-color);
-    margin-right: 10px;
-}
-
-.seller-info .btn-whatsapp {
-    margin-top: 20px;
-}
-
+/* Sección Ubicación */
 .location {
-    padding: 60px 0;
-    background-color: var(--light-color);
-    text-align: center;
+    padding: 100px 0;
+    background-color: var(--color-background-primary);
 }
 
 .location h2 {
-    color: var(--secondary-color);
-    margin-bottom: 40px;
-    font-size: 2rem;
+    color: var(--color-text-header);
+    margin-bottom: 60px;
+    font-size: 3em;
+    text-align: center;
 }
 
 .location-content {
     display: flex;
-    flex-direction: column;
+    flex-direction: column; 
     align-items: center;
-    gap: 30px;
-    max-width: 1000px;
+    gap: 50px;
+    max-width: 1100px;
     margin: 0 auto;
 }
 
 .map-container {
     width: 100%;
-    max-width: 800px;
-    height: 450px;
+    max-width: 900px;
+    height: 500px;
     overflow: hidden;
-    border-radius: 8px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 10px 40px var(--shadow-medium);
+    border: 1px solid var(--color-border-subtle);
 }
 
 .map-container iframe {
     width: 100%;
     height: 100%;
     display: block;
+    border: 0;
 }
 
 .location-info {
-    text-align: center;
-    max-width: 500px;
+    text-align: center; 
+    max-width: 600px;
 }
 
 .location-info h3 {
-    color: var(--secondary-color);
-    font-size: 1.8em;
-    margin-bottom: 20px;
+    color: var(--color-text-header);
+    font-size: 2.5em;
+    margin-bottom: 25px;
 }
 
 .location-info p {
-    color: var(--dark-color);
-    margin-bottom: 10px;
-    font-size: 1.1em;
-    line-height: 1.5;
+    color: var(--color-text-body);
+    margin-bottom: 15px;
+    font-size: 1.05em;
+    line-height: 1.6;
+    font-weight: 400;
 }
 
 .location-info i {
-    color: var(--primary-color);
-    margin-right: 10px;
+    color: var(--color-accent);
+    margin-right: 15px;
+    font-size: 1em;
 }
 
-@media (max-width: 768px) {
+
+footer {
+    background-color: var(--color-dark-navy);
+    color: white;
+    padding: 60px 20px;
+    font-size: 0.95em;
+    margin-top: auto; 
+}
+
+.footer-content {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: space-between;
+    align-items: flex-start;
+    max-width: 1300px;
+    margin: 0 auto;
+    gap: 40px; 
+}
+
+.footer-logo, .footer-links, .footer-contact, .footer-social {
+    flex: 1; 
+    min-width: 250px; 
+    text-align: center; 
+}
+
+.footer-logo img {
+    height: 70px;
+    margin-bottom: 20px;
+    margin-left: auto; 
+    margin-right: auto; 
+}
+
+.footer-logo p {
+    color: var(--color-light-blue);
+    line-height: 1.6;
+    font-weight: 300;
+}
+
+.footer-links h3, .footer-contact h3, .footer-social h3 {
+    color: white;
+    margin-bottom: 20px;
+    font-size: 1.5em;
+    font-weight: 700;
+}
+
+.footer-links ul li {
+    margin-bottom: 10px;
+}
+
+.footer-links a {
+    color: var(--color-light-blue);
+    transition: color 0.2s ease-in-out;
+    font-weight: 400;
+}
+
+.footer-links a:hover {
+    color: var(--color-accent);
+}
+
+.footer-contact p {
+    color: var(--color-light-blue);
+    margin-bottom: 10px;
+    line-height: 1.5;
+    font-weight: 400;
+}
+
+.footer-contact i {
+    margin-right: 15px;
+    color: var(--color-accent);
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center; 
+    gap: 15px; 
+}
+
+.social-icons a {
+    color: white;
+    font-size: 1.8em;
+    transition: color 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.social-icons a:hover {
+    color: var(--color-accent);
+    transform: translateY(-3px);
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 50px;
+    padding-top: 30px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    color: var(--color-light-blue);
+    font-size: 0.9em;
+    font-weight: 300;
+}
+
+.footer-bottom a {
+    color: var(--color-light-blue);
+    font-weight: 500;
+}
+
+.footer-bottom a:hover {
+    color: var(--color-accent);
+}
+
+
+
+
+@media (max-width: 480px) {
     header {
-        padding: 10px 15px;
+        padding: 15px 0;
     }
 
+    header .container {
+        padding: 0 15px;
+    }
+
+    .logo {
+        height: 50px;
+        margin-right: 10px;
+    }
+
+    .logo-container h1 {
+        font-size: 1.6rem; 
+    }
+
+   
     nav ul {
         display: none;
         flex-direction: column;
@@ -534,11 +994,13 @@ nav ul li a:hover {
         left: 0;
         width: 100%;
         height: 100vh;
-        background-color: var(--dark-color);
+        background-color: var(--color-dark-navy);
         z-index: 99;
         justify-content: center;
         align-items: center;
-        transform: translateX(100%);
+        transform: translateX(100%); 
+        transition: transform 0.4s ease-in-out;
+        padding: 0;
     }
 
     nav ul.active {
@@ -547,228 +1009,475 @@ nav ul li a:hover {
     }
 
     nav ul li {
-        margin: 20px 0;
+        margin: 25px 0;
     }
 
     nav ul li a {
         color: white;
-        font-size: 1.5rem;
+        font-size: 1.6rem;
+        border-bottom: none;
     }
 
     nav ul li a:hover {
-        color: var(--primary-color);
+        color: var(--color-light-blue);
     }
 
+    
     .menu-toggle {
         display: block;
+        font-size: 2rem;
+    }
+
+   
+    .btn-whatsapp-header {
+        display: none;
+    }
+   
+    nav ul li .btn-whatsapp-header {
+        display: inline-flex; 
+        background-color: var(--whatsapp-color);
+        color: white;
+        padding: 12px 20px;
+        margin-top: 20px; 
+        font-size: 1em;
+        width: auto;
+    }
+
+
+    .hero {
+        padding: 80px 15px;
+    }
+    .hero h2 {
+        font-size: 2.5rem;
+        margin-bottom: 15px;
+    }
+    .hero p {
+        font-size: 1.1rem;
+        margin-bottom: 30px;
+    }
+    .hero .btn, .hero .btn-whatsapp-hero {
+        margin: 0 5px 15px; 
+        padding: 12px 25px;
+        font-size: 0.9rem;
+    }
+
+    .vehicles, .seller, .location {
+        padding: 60px 0;
+    }
+    .vehicles h2, .seller h2, .location h2 {
+        font-size: 2.2rem;
+        margin-bottom: 40px;
     }
 
     .carousel-container {
-        padding: 0 10px;
+        padding: 0 10px; 
+        min-height: 380px;
     }
-
     .carousel-button {
-        width: 35px;
-        height: 35px;
-        font-size: 1.2rem;
+        width: 40px;
+        height: 40px;
+        font-size: 1.5rem;
+        left: 5px;
+        right: 5px;
     }
-
     .vehicle-card {
-        width: calc(100% - 0px);
-        min-width: calc(100% - 0px); 
+        width: calc(100% - 20px); 
+        padding: 20px;
     }
-    
-    .vehicle-grid-static {
-        grid-template-columns: 1fr;
-        gap: 20px;
+    .vehicle-image {
+        height: 160px;
     }
-
-    .footer-content {
-        flex-direction: column;
-        text-align: center;
-        gap: 20px;
+    .vehicle-card h3 {
+        font-size: 1.3em;
+        min-height: unset; 
     }
-    .footer-logo, .footer-links, .footer-contact {
-        width: 100%;
-        margin-bottom: 10px;
+    .vehicle-card p {
+        font-size: 0.9em;
     }
-    .footer-links ul {
-        align-items: center;
+    .vehicle-card .vehicle-features span {
+        font-size: 0.8em;
+        padding: 5px 10px;
     }
-
-    .location-info {
-        text-align: center;
-    }
-}
-
-@media (min-width: 769px) {
-    .menu-toggle {
-        display: none;
-    }
-    nav ul {
-        display: flex;
-        transform: translateX(0);
-        position: static;
-        height: auto;
-        background-color: transparent;
-    }
-    nav ul li a {
-        color: var(--secondary-color);
+    .vehicle-card .vehicle-price {
+        font-size: 1.8em;
     }
 
-    .location-content {
-        flex-direction: row;
-        justify-content: center;
-        align-items: flex-start;
-        gap: 50px;
-    }
-
-    .map-container {
-        flex: 2;
-    }
-
-    .location-info {
-        flex: 1;
-        text-align: left;
-    }
-}
-
-@media (min-width: 768px) {
-    .seller-container {
-        flex-direction: row;
-        text-align: left;
-    }
-
-    .seller-image {
-        margin-right: 40px;
-    }
-}
-
-@media (max-width: 1024px) and (min-width: 769px) {
-    .vehicle-card {
-        width: calc(50% - 10px);
-        min-width: unset;
-        max-width: unset;
-    }
-
-    .vehicle-grid-static {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 25px;
-    }
-    
     .seller-container {
         gap: 30px;
     }
     .seller-image {
-        width: 180px;
-        height: 180px;
-        margin-right: 30px;
+        width: 160px;
+        height: 160px;
+        border-width: 4px;
     }
-    .seller-info h2 {
-        font-size: 1.8em;
+    .seller-info p, .contact-info p {
+        font-size: 0.95em;
     }
-    .seller-info h3 {
-        font-size: 1.3em;
+
+    .map-container {
+        height: 250px;
     }
-    .seller-info p {
-        font-size: 1em;
+    .location-info h3 {
+        font-size: 2rem;
     }
-    .seller-info .contact-info p {
+    .location-info p {
         font-size: 0.9em;
     }
-    .seller-info .btn-whatsapp {
-        padding: 10px 20px;
-        font-size: 1em;
+
+    
+    footer {
+        padding: 40px 15px;
+    }
+    .footer-content {
+        flex-direction: column;
+        gap: 30px;
+    }
+    .footer-logo, .footer-links, .footer-contact, .footer-social {
+        min-width: unset;
+        width: 100%;
+        text-align: center;
+    }
+    .footer-logo img {
+        margin: 0 auto 15px auto;
+    }
+    .social-icons {
+        justify-content: center;
+    }
+    .footer-bottom {
+        margin-top: 30px;
+        padding-top: 20px;
     }
 }
 
-@media (min-width: 1200px) {
-    .container {
-        width: 85%;
+
+@media (min-width: 481px) and (max-width: 768px) {
+    header {
+        padding: 18px 0;
     }
+    header .container {
+        padding: 0 20px;
+    }
+
+    .logo {
+        height: 60px;
+        margin-right: 12px;
+    }
+    .logo-container h1 {
+        font-size: 2rem;
+    }
+
+    
+    nav ul {
+        display: none;
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: var(--color-dark-navy);
+        z-index: 99;
+        justify-content: center;
+        align-items: center;
+        transform: translateX(100%);
+        transition: transform 0.4s ease-in-out;
+        padding: 0;
+    }
+    nav ul.active {
+        transform: translateX(0);
+        display: flex;
+    }
+    nav ul li {
+        margin: 30px 0;
+    }
+    nav ul li a {
+        color: white;
+        font-size: 1.8rem;
+        border-bottom: none;
+    }
+    .menu-toggle {
+        display: block;
+        font-size: 2.2rem;
+    }
+    .btn-whatsapp-header {
+        display: none; 
+    }
+    nav ul li .btn-whatsapp-header {
+        display: inline-flex;
+        background-color: var(--whatsapp-color);
+        color: white;
+        padding: 14px 25px;
+        margin-top: 30px;
+        font-size: 1.05em;
+        width: auto;
+    }
+
+
+    .hero {
+        padding: 90px 20px;
+    }
+    .hero h2 {
+        font-size: 3.2rem;
+        margin-bottom: 20px;
+    }
+    .hero p {
+        font-size: 1.4rem;
+        margin-bottom: 40px;
+    }
+    .hero .btn, .hero .btn-whatsapp-hero {
+        margin: 0 8px 18px;
+    }
+
+    .vehicles, .seller, .location {
+        padding: 70px 0;
+    }
+    .vehicles h2, .seller h2, .location h2 {
+        font-size: 2.6rem;
+        margin-bottom: 50px;
+    }
+
+    .carousel-container {
+        padding: 0 20px;
+        min-height: 420px;
+    }
+    .carousel-button {
+        width: 48px;
+        height: 48px;
+        font-size: 1.8rem;
+        left: 10px;
+        right: 10px;
+    }
+    .vehicle-card {
+        width: calc(50% - 20px);
+        max-width: unset;
+        padding: 25px;
+    }
+    .vehicle-image {
+        height: 180px;
+    }
+    .vehicle-card h3 {
+        font-size: 1.4em;
+        min-height: unset;
+    }
+    .vehicle-card p {
+        font-size: 0.95em;
+    }
+    .vehicle-card .vehicle-features span {
+        font-size: 0.85em;
+    }
+    .vehicle-card .vehicle-price {
+        font-size: 1.9em;
+    }
+
+    .seller-container {
+        flex-direction: column;
+        gap: 40px;
+    }
+    .seller-image {
+        width: 180px;
+        height: 180px;
+    }
+    .seller-info {
+        text-align: center;
+    }
+
+    .map-container {
+        height: 350px;
+    }
+    .location-info h3 {
+        font-size: 2.2rem;
+    }
+
+    /* Footer en Tablet */
+    footer {
+        padding: 50px 20px;
+    }
+    .footer-content {
+        flex-direction: column;
+        gap: 35px;
+    }
+    .footer-logo, .footer-links, .footer-contact, .footer-social {
+        width: 100%;
+        text-align: center;
+    }
+    .footer-logo img {
+        margin: 0 auto 15px auto;
+    }
+    .social-icons {
+        justify-content: center;
+    }
+    .footer-bottom {
+        margin-top: 40px;
+        padding-top: 25px;
+    }
+}
+
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    header {
+        padding: 20px 0;
+    }
+    header .container {
+        padding: 0 30px;
+    }
+
+    .logo {
+        height: 65px;
+    }
+    .logo-container h1 {
+        font-size: 2.2rem;
+    }
+
+    nav ul {
+        display: flex; 
+    }
+    .menu-toggle {
+        display: none;
+    }
+    nav ul li {
+        margin: 0 15px;
+    }
+    nav ul li a {
+        font-size: 0.95em;
+    }
+
+    .hero h2 {
+        font-size: 3.5rem;
+    }
+    .hero p {
+        font-size: 1.5rem;
+    }
+    .hero .btn, .hero .btn-whatsapp-hero {
+        margin: 0 10px 0;
+    }
+
+    .vehicles h2 {
+        font-size: 3rem;
+    }
+
     .carousel-container {
         padding: 0 40px;
     }
     .carousel-button {
-        width: 50px;
-        height: 50px;
-        font-size: 1.8rem;
+        left: 0;
+        right: 0;
     }
-    .carousel-button.prev {
-        left: 10px;
+    .vehicle-card {
+        width: calc(33.333% - 20px);
+        min-width: unset;
+        max-width: unset;
     }
-    .carousel-button.next {
-        right: 10px;
+    .vehicle-image {
+        height: 180px;
+    }
+    .vehicle-card h3 {
+        min-height: 2.8em;
+    }
+
+    .seller-container, .location-content {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 40px;
+    }
+    .seller-info {
+        text-align: left;
+    }
+    .location-info {
+        text-align: left;
+    }
+    .map-container {
+        max-width: 50%;
+        height: 450px;
+    }
+    .location-info {
+        flex: 1;
+    }
+
+    
+    .footer-logo, .footer-links, .footer-contact, .footer-social {
+        text-align: left;
+    }
+    .footer-logo img {
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .social-icons {
+        justify-content: flex-start;
+    }
+}
+
+
+@media (min-width: 1025px) {
+    header {
+        padding: 25px 0;
+    }
+    header .container {
+        padding: 0 20px;
+    }
+
+    .logo-container h1 {
+        font-size: 2.5rem;
+    }
+    nav ul li {
+        margin: 0 25px;
+    }
+    nav ul li a {
+        font-size: 1em;
+    }
+
+    .hero h2 {
+        font-size: 4rem;
+    }
+    .hero p {
+        font-size: 1.6rem;
+    }
+
+    .vehicles h2 {
+        font-size: 3.2rem;
+    }
+
+    .carousel-container {
+        padding: 0 50px;
+    }
+    .carousel-button {
+        left: 0;
+        right: 0;
     }
     .vehicle-card {
         width: 350px;
+        max-width: 380px;
     }
-}
 
-footer {
-    background-color: var(--dark-color);
-    color: white;
-    padding: 40px 20px;
-    font-size: 0.9em;
-}
+    .seller-container {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 60px;
+    }
+    .seller-info {
+        text-align: left;
+    }
 
-.footer-content {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: flex-start;
-    max-width: 1200px;
-    margin: 0 auto;
-    gap: 30px;
-}
+    .location-content {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 60px;
+    }
+    .map-container {
+        max-width: 60%;
+        height: 550px;
+    }
+    .location-info {
+        flex: 1;
+    }
 
-.footer-logo, .footer-links, .footer-contact {
-    flex: 1;
-    min-width: 250px;
-}
-
-.footer-logo img {
-    height: 60px;
-    margin-bottom: 15px;
-}
-
-.footer-logo p {
-    color: #bbb;
-}
-
-.footer-links h4, .footer-contact h4 {
-    color: white;
-    margin-bottom: 15px;
-    font-size: 1.2em;
-}
-
-.footer-links ul li {
-    margin-bottom: 8px;
-}
-
-.footer-links a {
-    color: #bbb;
-    transition: color 0.3s ease;
-}
-
-.footer-links a:hover {
-    color: var(--primary-color);
-}
-
-.footer-contact p {
-    color: #bbb;
-    margin-bottom: 8px;
-}
-
-.footer-contact i {
-    margin-right: 10px;
-    color: var(--primary-color);
-}
-
-.footer-bottom {
-    text-align: center;
-    margin-top: 30px;
-    padding-top: 20px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    color: #aaa;
+    .footer-logo, .footer-links, .footer-contact, .footer-social {
+        text-align: left;
+    }
+    .footer-logo img {
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .social-icons {
+        justify-content: flex-start;
+    }
 }
