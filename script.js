@@ -60,7 +60,7 @@ const GAP = 20;
         {
             id: 4,
             name: "Outlander PHEV",
-            price: "Desde $819,900 M.N.",
+            price: "Desde $879,900 M.N.",
             year: "2024",
             transmission: "PHEV Automática",
             fuel: "Gasolina/Eléctrico (Híbrido Enchufable)",
@@ -79,19 +79,9 @@ const GAP = 20;
             image: "images/outlander-sport-primary1.png",
             whatsapp: "https://wa.me/+524924933151?text=Hola%20Gerardo,%20estoy%20interesado%20en%20el%20Outlander%20Sport"
         },
+      
         {
             id: 6,
-            name: "L200",
-            price: "Desde $538,800 M.N.",
-            year: "2024",
-            transmission: "Manual",
-            fuel: "Gasolina",
-            description: "Mitsubishi L200 es la pick-up todoterreno definitiva. Con resistencia probada y tecnología avanzada, ofrece potencia y versatilidad para dominar cualquier camino o desafío.",
-            image: "images/l200.png",
-            whatsapp: "https://wa.me/+524924933151?text=Hola%20Gerardo,%20estoy%20interesado%20en%20el%20L200%202024."
-        },
-        {
-            id: 7,
             name: "L200",
             price: "Desde $573,100 M.N.",
             year: "2025",
@@ -102,7 +92,7 @@ const GAP = 20;
             whatsapp: "https://wa.me/+524924933151?text=Hola%20Gerardo,%20estoy%20interesado%20en%20el%20L200%202025."
         },
         {
-            id: 8,
+            id: 7,
             name: "Outlander PHEV",
             price: "Desde $827,900 M.N.",
             year: "2025",
@@ -113,7 +103,7 @@ const GAP = 20;
             whatsapp: "https://wa.me/+524924933151?text=Hola%20Gerardo,%20estoy%20interesado%20en%20el%20OutlanderPHEV%202025."
         },
         {
-            id: 9,
+            id: 8,
             name: "L200 GSR",
             price: "Desde $852,400 M.N.",
             year: "2025",
@@ -124,7 +114,7 @@ const GAP = 20;
             whatsapp: "https://wa.me/+524924933151?text=Hola%20Gerardo,%20estoy%20interesado%20en%20el%20L200%20GSR."
         },
         {
-            id: 10,
+            id: 9,
             name: "Mirage G4",
             price: "Desde $294,400 M.N.",
             year: "2025",
