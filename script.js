@@ -79,6 +79,7 @@ const GAP = 20;
             image: "images/outlander-sport-primary1.png",
             whatsapp: "https://wa.me/+524924933151?text=Hola%20Gerardo,%20estoy%20interesado%20en%20el%20Outlander%20Sport"
         },
+      
         {
             id: 6,
             name: "L200",
